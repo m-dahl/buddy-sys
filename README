@@ -57,3 +57,8 @@ https://git.code.sf.net/p/buddy/gitcode.
 Since that repo has not been updated since 2014 I have taken the
 liberty of copying the sources into vendor/, as I suspect the original
 repo is more likely to dissapear than to receive additional bug-fixes.
+
+List of fixes in vendor/ that are not in upstream:
+
+* 6bef795 - Support fails to allocate new memory after a
+  bdd_done/bdd_init cycle
