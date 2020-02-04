@@ -47,7 +47,10 @@ fn main() {
     cc::Build::new()
         .include(&config_dir)
         .include(&vendor_dir)
-        .pic(true)
+    // its useful to have this package fast even in debug builds
+    // (original package used -O2, comparisons TODO. Compilers should
+    // have improved since 1997...)
+        .opt_level(3)
         .file("vendor/bddio.c")
         .file("vendor/bddop.c")
         .file("vendor/bvec.c")
