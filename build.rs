@@ -62,15 +62,21 @@ fn main() {
         .file("vendor/prime.c")
         .file("vendor/reorder.c")
         .file("vendor/tree.c")
+        .flag_if_supported("-Wno-unused-result")
         .compile("buddy");
 
     let builder = bindgen::Builder::default()
         .header("vendor/bdd.h")
         .header("vendor/fdd.h")
+        .header_contents("extra.h",
+                         r#"#include <time.h>
+                            const int clocks_per_sec = CLOCKS_PER_SEC;
+                            "#)
         .whitelist_type("BDD")
         .whitelist_type("(b|f)dd.*")
         .whitelist_function("(b|f)dd.*")
         .whitelist_var("(b|f)dd.*")
+        .whitelist_var("clocks_per_sec")
         .parse_callbacks(Box::new(Macros {}))
         .derive_copy(false);
 
